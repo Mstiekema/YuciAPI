@@ -1,0 +1,24 @@
+{
+  "name": "yuciapi",
+  "version": "1.0.0",
+  "description": "Useful API for Twitch related bots / websites",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mstiekema/YuciAPI.git"
+  },
+  "keywords": [
+    "Twitch",
+    "API",
+    "TwitchAPI"
+  ],
+  "author": "Mstiekema",
+  "bugs": {
+    "url": "https://github.com/Mstiekema/YuciAPI/issues"
+  },
+  "homepage": "https://github.com/Mstiekema/YuciAPI#readme",
+  "dependencies": {
+    "ejs": "^2.5.5",
+    "express": "^4.14.0"
+  }
+}
