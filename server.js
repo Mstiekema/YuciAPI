@@ -7,6 +7,7 @@ var user = require("./user.js");
 user.followage(app, conf, reqst);
 user.followsince(app, conf, reqst);
 user.age(app, conf, reqst);
+user.id(app, conf, reqst)
 
 var test = "Testing var"
 

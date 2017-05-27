@@ -91,7 +91,18 @@ module.exports = {
   },
   id: function(app, conf, reqst) {
     app.get('/user/id/:user', function(req, res) {
-      res.send(test);
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        res.send(JSON.parse(body).users[0]["_id"])
+      })
     });
   },
   blocked: function(app, conf, reqst) {
