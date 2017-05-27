@@ -6,6 +6,7 @@ var user = require("./user.js");
 // User API
 user.followage(app, conf, reqst);
 user.followsince(app, conf, reqst);
+user.age(app, conf, reqst);
 
 var test = "Testing var"
 

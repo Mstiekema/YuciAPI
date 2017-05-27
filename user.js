@@ -71,8 +71,22 @@ module.exports = {
     });
   },
   age: function(app, conf, reqst) {
-    app.get('/user/age/time/:user', function(req, res) {
-      res.send(test);
+    app.get('/user/age/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users/'+usr,
+        headers: {
+          'Client-ID': tId
+        }
+      }
+      reqst(info, function (error, response, body) {
+        body = JSON.parse(body)
+        var since = new Date(body["created_at"])
+        var d = since.getDate(); var mo = since.getMonth() + 1; var y = since.getFullYear();
+        var cDate = d + "/" + mo + "/" + y
+        res.send(usr + "'s account was created on " + cDate);
+      })
     });
   },
   id: function(app, conf, reqst) {
