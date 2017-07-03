@@ -24,7 +24,7 @@ module.exports = {
           pTime += y + " years "
         }
         if((Math.floor(t.getUTCMonth() + 1) != 0)) {
-          var mo = Math.floor(t.getUTCMonth() + 1)
+          var mo = Math.floor(t.getUTCMonth())
           pTime += mo + " months "
         }
         if(Math.floor(t.getUTCDate() - 1) != 0) {
