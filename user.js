@@ -43,7 +43,7 @@ module.exports = {
           var s = Math.floor(t.getUTCSeconds()); 
           pTime += s + " seconds"
         }
-        res.send( pTime)
+        res.send(pTime)
       })
     });
   },
@@ -129,7 +129,7 @@ module.exports = {
           }
         }
         reqst(info, function (error, response, body) {
-          res.sendStatus(JSON.parse(body).followers)
+          res.send(JSON.parse(body).followers.toString())
         })
       })
     });
@@ -184,6 +184,86 @@ module.exports = {
         }
         reqst(info, function (error, response, body) {
           res.send(JSON.parse(body).status)
+        })
+      })
+    });
+  },
+  uptime: function(app, conf, reqst) {
+    app.get('/user/uptime/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        if (JSON.parse(body).users == undefined) return res.send("This user does not exist")
+        var userId = JSON.parse(body).users[0]["_id"]
+        var info = {
+          url: 'https://api.twitch.tv/kraken/streams/'+userId,
+          headers: {
+            'Client-ID': tId,
+            'Accept': 'application/vnd.twitchtv.v5+json'
+          }
+        }
+        reqst(info, function (error, response, body) {
+          body = JSON.parse(body)
+          if (body.stream == null) return res.send(req.params.user + " is not live")
+
+          var b = new Date(body.stream["created_at"]);
+          var n = new Date();
+          var since = parseInt(b.getTime())
+          var now = parseInt(n.getTime())
+          var t = new Date(now - since);
+          var pTime = new String()
+          if(Math.floor(t.getUTCDate() - 1) != 0) {
+            var d = Math.floor(t.getUTCDate() - 1)
+            pTime += d + " days  "
+          }
+          if(Math.floor(t.getUTCHours()) != 0) {
+            var h = Math.floor(t.getUTCHours()); 
+            pTime += h + " hours "
+          }
+          if(Math.floor(t.getUTCMinutes()) != 0) {
+            var mi = Math.floor(t.getUTCMinutes()); 
+            pTime += mi + " minutes "
+          }
+          if(Math.floor(t.getUTCSeconds()) != 0) {
+            var s = Math.floor(t.getUTCSeconds()); 
+            pTime += s + " seconds"
+          }
+          res.send(pTime)
+        })
+      })
+    });
+  },
+  viewers: function(app, conf, reqst) {
+    app.get('/user/viewers/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        if (JSON.parse(body).users == undefined) return res.send("This user does not exist")
+        var userId = JSON.parse(body).users[0]["_id"]
+        var info = {
+          url: 'https://api.twitch.tv/kraken/streams/'+userId,
+          headers: {
+            'Client-ID': tId,
+            'Accept': 'application/vnd.twitchtv.v5+json'
+          }
+        }
+        reqst(info, function (error, response, body) {
+          if (JSON.parse(body).stream == null) return res.send(req.params.user + " is not live")
+          res.send(JSON.parse(body).stream.viewers.toString())
         })
       })
     });
