@@ -105,14 +105,82 @@ module.exports = {
       })
     });
   },
-  blocked: function(app, conf, reqst) {
-    app.get('/user/blocked/:user', function(req, res) {
-      res.send(test);
-    });
-  },
   followers: function(app, conf, reqst) {
     app.get('/user/followers/:user', function(req, res) {
-      res.send(test);
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        var userId = JSON.parse(body).users[0]["_id"]
+        var info = {
+          url: 'https://api.twitch.tv/kraken/channels/'+userId,
+          headers: {
+            'Client-ID': tId,
+            'Accept': 'application/vnd.twitchtv.v5+json'
+          }
+        }
+        reqst(info, function (error, response, body) {
+          res.sendStatus(JSON.parse(body).followers)
+        })
+      })
+    });
+  },
+  game: function(app, conf, reqst) {
+    app.get('/user/game/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        var userId = JSON.parse(body).users[0]["_id"]
+        var info = {
+          url: 'https://api.twitch.tv/kraken/channels/'+userId,
+          headers: {
+            'Client-ID': tId,
+            'Accept': 'application/vnd.twitchtv.v5+json'
+          }
+        }
+        reqst(info, function (error, response, body) {
+          res.send(JSON.parse(body).game)
+        })
+      })
+    });
+  },
+  title: function(app, conf, reqst) {
+    app.get('/user/title/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        var userId = JSON.parse(body).users[0]["_id"]
+        var info = {
+          url: 'https://api.twitch.tv/kraken/channels/'+userId,
+          headers: {
+            'Client-ID': tId,
+            'Accept': 'application/vnd.twitchtv.v5+json'
+          }
+        }
+        reqst(info, function (error, response, body) {
+          res.send(JSON.parse(body).status)
+        })
+      })
     });
   }
 }

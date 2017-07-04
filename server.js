@@ -14,7 +14,10 @@ app.set('view engine', 'html');
 user.followage(app, conf, reqst);
 user.followsince(app, conf, reqst);
 user.age(app, conf, reqst);
-user.id(app, conf, reqst)
+user.id(app, conf, reqst);
+user.followers(app, conf, reqst)
+user.game(app, conf, reqst)
+user.title(app, conf, reqst)
 
 app.get('/', function(req, res) {
   res.render('index.html');

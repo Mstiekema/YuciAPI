@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <style>
 
 #top {
+  position: fixed;
+  width: 100%;
+  top: 0px;
   margin-top: -20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -18,21 +23,22 @@
 #top h2 {
   font-size: 40px;
   display: inline-block;
-  line-height: 80px;
+  line-height: 115px;
 }
 
 #top small {
   display: inline-block;
-  line-height: 80px;
+  line-height: 115px;
 }
 
 
 #main {
   margin-left: 20px;
   margin-right: 20px;
-  margin-top: 20px;
-  width: 500px;
+  width: 600px;
   margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -53,7 +59,7 @@
 
 <div id='top'>
 <h2>YuciAPI</h2>
-<small>Custom Twitch API for everyone</small>
+<small>A custom Twitch API</small>
 
 </div>
 
@@ -67,40 +73,76 @@
 
 <h2>Endpoints</h2>
 <p>
-<a href='http://api.yucibot.nl/followage/:user/:channel' target="_blank" class='apiLink'><b>/followage/:user/:channel</b></a><br>
-Retrieves the followage of a certain user
+<table class="table table-striped" style="text-align: left;">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>What does it do?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/followage/:user/:channel' target="_blank" class='apiLink'>/followage/:user/:channel</a></th>
+      <td>Retrieves the followage of a certain user</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/followsince/:user/:channel' target="_blank" class='apiLink'>/followsince/:user/:channel</a></th>
+      <td>Retrieves when a user followed a channel</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/user/age/:user' target="_blank" class='apiLink'>/user/age/:user</a></th>
+      <td>Shows when a user's account was created</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/user/id/:user' target="_blank" class='apiLink'>/user/id/:user</a></th>
+      <td>Shows the ID of a user</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/user/followers/:user' target="_blank" class='apiLink'>/user/followers/:user</a></th>
+      <td>Returns the amount of followers of a channel</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/user/game/:user' target="_blank" class='apiLink'>/user/game/:user</a></th>
+      <td>Returns the current game</td>
+    </tr>
+    <tr>
+      <th scope="row"><a href='http://api.yucibot.nl/user/title/:user' target="_blank" class='apiLink'>/user/title/:user</a></th>
+      <td>Returns the title of the stream</td>
+    </tr>
+  </tbody>
+</table>
 
-<br><br><a href='http://api.yucibot.nl/followsince/:user/:channel' target="_blank" class='apiLink'><b>/followsince/:user/:channel</b></a><br>
-Retrieves when a user followed a channel
-
-<br><br><a href='http://api.yucibot.nl/user/age/:user' target="_blank" class='apiLink'><b>/user/age/:user</b></a><br>
-Shows when a user's account was created
-
-<br><br><a href='http://api.yucibot.nl/user/id/:user' target="_blank" class='apiLink'><b>/user/id/:user</b></a><br>
-Shows the ID of a user
-
-<br><br><u>More coming soon</u>
+<u>More coming soon</u>
 
 </p>
 
 <h2>Examples</h2>
 <p>
-Here are a few examples of how you can add these API's to your bot. Replace the CAPITALIZED words with your own channel.<br><br>
+Here are a few examples of how you can add these API's to your bot. Replace the CAPITALIZED words with your own channel.<br>
 
-<b>Nightbot</b><br>
-$(urlfetch http://api.yucibot.nl/followage/$(touser)/CHANNEL)
-<br><br>
-
-<b>Ankhbot R2</b><br>
-$readapi(http://api.yucibot.nl/followage/$user/CHANNEL)
-<br><br>
-
-<b>Deepbot</b><br>
-@customapi@[http://api.yucibot.nl/followage/@user@/CHANNEL]
-
+<table class="table table-striped" style="text-align: left;">
+  <thead>
+    <tr>
+      <th>Bot</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Nightbot</th>
+      <td>$(urlfetch http://api.yucibot.nl/followage/$(touser)/CHANNEL)</td>
+    </tr>
+    <tr>
+      <th scope="row">Ankhbot</th>
+      <td>$readapi(http://api.yucibot.nl/followage/$user/CHANNEL)</td>
+    </tr>
+    <tr>
+      <th scope="row">Deepbot</th>
+      <td>@customapi@[http://api.yucibot.nl/followage/@user@/CHANNEL]</td>
+    </tr>
+  </tbody>
+</table>
 </p>
-
 </div>
-
 </body>
 </html>
