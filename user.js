@@ -102,7 +102,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         res.send(JSON.parse(body).users[0]["_id"])
       })
     });
@@ -119,7 +119,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         var userId = JSON.parse(body).users[0]["_id"]
         var info = {
           url: 'https://api.twitch.tv/kraken/channels/'+userId,
@@ -146,7 +146,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         var userId = JSON.parse(body).users[0]["_id"]
         var info = {
           url: 'https://api.twitch.tv/kraken/channels/'+userId,
@@ -173,7 +173,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         var userId = JSON.parse(body).users[0]["_id"]
         var info = {
           url: 'https://api.twitch.tv/kraken/channels/'+userId,
@@ -200,7 +200,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         var userId = JSON.parse(body).users[0]["_id"]
         var info = {
           url: 'https://api.twitch.tv/kraken/streams/'+userId,
@@ -252,7 +252,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
-        if (JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
         var userId = JSON.parse(body).users[0]["_id"]
         var info = {
           url: 'https://api.twitch.tv/kraken/streams/'+userId,
