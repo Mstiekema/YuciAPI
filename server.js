@@ -6,6 +6,8 @@ var user = require("./user.js");
 
 // Basic website stuff
 app.use(express.static('.'));
+app.engine('html', require('ejs').renderFile);
+app.set('views', __dirname);
 app.set('view engine', 'html');
 
 // User API
