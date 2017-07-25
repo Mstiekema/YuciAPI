@@ -11,6 +11,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
+        if(body = undefined) return res.send(usr + " is not following " + chnl)
         body = JSON.parse(body)
         if(body.error) return res.send(body.message)
         var b = new Date(body["created_at"]);
@@ -59,6 +60,7 @@ module.exports = {
         }
       }
       reqst(info, function (error, response, body) {
+        if(body = undefined) return res.send(usr + " is not following " + chnl)
         body = JSON.parse(body)
         if(body.error) return res.send(body.message)
         var since = new Date(body["created_at"])
