@@ -107,6 +107,23 @@ module.exports = {
       })
     });
   },
+  pf: function(app, conf, reqst) {
+    app.get('/user/pf/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users?login='+usr,
+        headers: {
+          'Client-ID': tId,
+          'Accept': 'application/vnd.twitchtv.v5+json'
+        }
+      }
+      reqst(info, function (error, response, body) {
+        if (JSON.parse(body).users == undefined || JSON.parse(body).users[0] == undefined) return res.send("This user does not exist")
+        res.send(JSON.parse(body).users[0].logo)
+      })
+    });
+  },
   followers: function(app, conf, reqst) {
     app.get('/user/followers/:user', function(req, res) {
       var usr = req.params.user
