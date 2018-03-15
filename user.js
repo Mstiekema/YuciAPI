@@ -70,6 +70,29 @@ module.exports = {
       })
     });
   },
+  followsinceRaw: function(app, conf, reqst) {
+    app.get('/raw/followsince/:user/:channel', function(req, res) {
+      var usr = req.params.user
+      var chnl = req.params.channel
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users/'+usr+'/follows/channels/'+chnl,
+        headers: {
+          'Client-ID': tId
+        }
+      }
+      reqst(info, function (error, response, body) {
+        body = JSON.parse(body)
+        if(body.error) return res.send(body.message)
+        var since = new Date(body["created_at"])
+        var d = since.getDate(); var mo = since.getMonth() + 1; var y = since.getFullYear();
+        var h = since.getHours(); var mi = since.getMinutes(); var s = since.getSeconds();
+        var date = d + "/" + mo + "/" + y
+        var time = h + ":" + mi + ":" + s
+        res.send(date + " at " + time)
+      })
+    });
+  },
   age: function(app, conf, reqst) {
     app.get('/user/age/:user', function(req, res) {
       var usr = req.params.user
@@ -87,6 +110,26 @@ module.exports = {
         var d = since.getDate(); var mo = since.getMonth() + 1; var y = since.getFullYear();
         var cDate = d + "/" + mo + "/" + y
         res.send(usr + "'s account was created on " + cDate);
+      })
+    });
+  },
+  ageRaw: function(app, conf, reqst) {
+    app.get('/raw/user/age/:user', function(req, res) {
+      var usr = req.params.user
+      var tId = conf.cInfo.id
+      var info = {
+        url: 'https://api.twitch.tv/kraken/users/'+usr,
+        headers: {
+          'Client-ID': tId
+        }
+      }
+      reqst(info, function (error, response, body) {
+        body = JSON.parse(body)
+        if(body.error) return res.send(body.message)
+        var since = new Date(body["created_at"])
+        var d = since.getDate(); var mo = since.getMonth() + 1; var y = since.getFullYear();
+        var cDate = d + "/" + mo + "/" + y
+        res.send(cDate);
       })
     });
   },

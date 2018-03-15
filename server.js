@@ -13,7 +13,9 @@ app.set('view engine', 'html');
 // User API
 user.followage(app, conf, reqst);
 user.followsince(app, conf, reqst);
+user.followsinceRaw(app, conf, reqst);
 user.age(app, conf, reqst);
+user.ageRaw(app, conf, reqst);
 user.id(app, conf, reqst);
 user.pf(app, conf, reqst);
 user.followers(app, conf, reqst);
