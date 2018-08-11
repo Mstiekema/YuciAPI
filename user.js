@@ -23,7 +23,7 @@ module.exports = {
           var y = Math.floor(t.getUTCFullYear() - 1970)
           pTime += y + " years "
         }
-        if((Math.floor(t.getUTCMonth() + 1) != 0)) {
+        if(Math.floor(t.getUTCMonth()) != 0) {
           var mo = Math.floor(t.getUTCMonth())
           pTime += mo + " months "
         }
@@ -32,15 +32,15 @@ module.exports = {
           pTime += d + " days  "
         }
         if(Math.floor(t.getUTCHours()) != 0) {
-          var h = Math.floor(t.getUTCHours()); 
+          var h = Math.floor(t.getUTCHours());
           pTime += h + " hours "
         }
         if(Math.floor(t.getUTCMinutes()) != 0) {
-          var mi = Math.floor(t.getUTCMinutes()); 
+          var mi = Math.floor(t.getUTCMinutes());
           pTime += mi + " minutes "
         }
         if(Math.floor(t.getUTCSeconds()) != 0) {
-          var s = Math.floor(t.getUTCSeconds()); 
+          var s = Math.floor(t.getUTCSeconds());
           pTime += s + " seconds"
         }
         res.send(pTime)
@@ -284,15 +284,15 @@ module.exports = {
             pTime += d + " days  "
           }
           if(Math.floor(t.getUTCHours()) != 0) {
-            var h = Math.floor(t.getUTCHours()); 
+            var h = Math.floor(t.getUTCHours());
             pTime += h + " hours "
           }
           if(Math.floor(t.getUTCMinutes()) != 0) {
-            var mi = Math.floor(t.getUTCMinutes()); 
+            var mi = Math.floor(t.getUTCMinutes());
             pTime += mi + " minutes "
           }
           if(Math.floor(t.getUTCSeconds()) != 0) {
-            var s = Math.floor(t.getUTCSeconds()); 
+            var s = Math.floor(t.getUTCSeconds());
             pTime += s + " seconds"
           }
           res.send(pTime)
